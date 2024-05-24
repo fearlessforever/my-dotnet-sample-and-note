@@ -1,12 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/MyApp/bin
-/MyApp/obj
-/MyLibrary/bin
-/MyLibrary/obj
-/MyDataEF/bin
-/MyDataEF/obj
+*/bin
+*/obj
 /extra/LocalDatabase*
 
 # misc
