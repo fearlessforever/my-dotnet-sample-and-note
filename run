@@ -1,0 +1,43 @@
+#!/bin/bash
+
+declare -A commands=(
+  ['Api']=Api
+  ['run-docker']=run-docker
+  ['stop-docker']=stop-docker
+);
+
+selectedCMD=$1
+
+if [[ $# -gt 0 && ${commands[$selectedCMD]} ]]; then
+    shift
+    if [[ ${commands[$selectedCMD]} ]]; then
+
+      if [[ $selectedCMD == 'Api' ]]; then
+        ( cd ./App-Api && dotnet run "$@" )
+      fi
+
+      # if [[ $selectedCMD == 'run-docker' ]]; then
+      #   docker build -f docker/dockerfile -t my-nestjs:latest . --progress=plain --network=host
+      #   docker-compose -f docker/docker-compose.yml up -d
+      # fi
+
+      # if [[ $selectedCMD == 'stop-docker' ]]; then
+      #   docker-compose -f docker/docker-compose.yml down
+      # fi
+
+    else
+      echo ""
+      echo "unknown commands"
+      echo "try one of these -> ${commands[@]}"
+      echo ""
+    fi
+    
+else
+  echo ""
+  echo "unknown command"
+  echo "try one of these -> ${commands[@]}"
+  echo "example: ./run ${commands[Api]} "
+  echo ""
+
+fi
+
