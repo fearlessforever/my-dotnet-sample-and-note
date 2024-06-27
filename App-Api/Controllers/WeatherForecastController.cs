@@ -1,6 +1,7 @@
+using Fearlessforever.Api.Modules.Starter;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers;
+namespace Fearlessforever.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
