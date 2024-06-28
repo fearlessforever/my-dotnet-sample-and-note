@@ -17,7 +17,8 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
-    <RepoRoot>../Binary</RepoRoot>
+    <!-- <RepoRoot>../Binary</RepoRoot> -->
+    <RepoRoot>$(MSBuildThisFileDirectory)\Binary</RepoRoot>
   </PropertyGroup>
 
   <PropertyGroup>
