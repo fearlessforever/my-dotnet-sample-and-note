@@ -4,6 +4,10 @@
 			"name": "WebApi",
 			"path": "App-Api"
 		},
+		{
+			"name": "Shared",
+			"path": "Shared"
+		},
 	],
 	"settings": {
 		"files.exclude": {
