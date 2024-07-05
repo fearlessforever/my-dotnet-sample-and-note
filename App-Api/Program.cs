@@ -1,3 +1,5 @@
+using Fearlessforever.Api.Core.Logging;
+using Fearlessforever.Api.Core.RateLimiter;
 using Fearlessforever.Api.Modules.Sample;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 //========================================================
 // Register Module Service & Configuration
 builder.Services.AddModuleSampleServices();
+builder.Services.AddCoreRateLimiter();
+builder.Host.AddCoreLogging();
 //========================================================
 
 
@@ -26,8 +30,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+
 app.UseAuthorization();
 
 app.MapControllers();
+//=========================================================
+app.UseCoreRateLimiter();
+//=========================================================
 
 app.Run();
