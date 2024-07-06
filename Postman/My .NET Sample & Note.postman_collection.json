@@ -150,6 +150,47 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Sample Rate Limiter",
+			"item": [
+				{
+					"name": "Rate Limit ~ Concurrency 10 Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/SampleRateLimiter/concurrency-limit-10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"SampleRateLimiter",
+								"concurrency-limit-10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rate Limit ~ Fixed 10 Request in 10 secs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/SampleRateLimiter/fixed-limit-10-in-10sec",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"SampleRateLimiter",
+								"fixed-limit-10-in-10sec"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
