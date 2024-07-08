@@ -191,6 +191,28 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "SampleHandleError",
+			"item": [
+				{
+					"name": "SampleHandleError",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/SampleHandleError",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"SampleHandleError"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
