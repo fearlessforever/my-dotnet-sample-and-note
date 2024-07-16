@@ -1,4 +1,5 @@
 
+using Fearlessforever.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using static Fearlessforever.Api.Utils.MyApiResponse;
 
@@ -17,6 +18,7 @@ public static partial class MinimalApiExtensions
 
       sample.MapPost("/", ( SampleDtoCreate sampleDtoCreate , [FromServices]SampleService sampleService) =>
       {
+        DebugHelper.Log(sampleDtoCreate , "Request");
         return sampleService.Add(sampleDtoCreate);
       });
 
@@ -55,7 +57,8 @@ public static partial class MinimalApiExtensions
         }
         catch (Exception error)
         {
-          result = GenerateApiResponse<object>(data: null, isHeaderStatus: true, code: 402, status: "error", message: error.Message );
+          DebugHelper.LogError(error.Message,"MiniApi Sample");
+          result = GenerateApiResponse<object>(data: null, isHeaderStatus: true, code: 400, status: "error", message: error.Message );
         }
 
         return result;
