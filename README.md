@@ -9,8 +9,8 @@
 - [x] Sample Hybrid Cache ( in-app memory & optional Redis Connection ) [PR #14](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/14)
 - [ ] Sample Generate Docker Image For Production
 - [ ] Sample Github Action ( CI/CD )
-- [x] Sample Task Scheduling / Queue [PR #15](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/15)
-- [x] Sample How to Use Secret Configuration [PR #15](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/15)
+- [x] Sample Task Scheduling / Queue [PR #22](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/22)
+- [x] Sample How to Use Secret Configuration [PR #22](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/22)
 - [ ] Sample Sending Email
 - [ ] Sample Server Sent Events ( SSE ) - realtime feature only server can send data
 - [ ] Sample Real time connection ( a.k.a socket but in .NET known as SignalR ) - realtime feature server <-> client send data
