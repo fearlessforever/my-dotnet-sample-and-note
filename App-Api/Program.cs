@@ -1,3 +1,4 @@
+using Fearlessforever.Api.Core.AppCancelToken;
 using Fearlessforever.Api.Core.CacheProviders;
 using Fearlessforever.Api.Core.ConfigsLoader;
 using Fearlessforever.Api.Core.HandleException;
@@ -43,9 +44,11 @@ app.UseHttpsRedirection();
 
 
 app.UseAuthorization();
-
+// Enable serving static files
+app.UseStaticFiles("/assets"); 
 app.MapControllers();
 //=========================================================
+app.UseCoreAppCancelToken();
 app.UseCoreConfigsLogHelper();
 app.UseCoreRateLimiter();
 app.UseCoreHandleException();
