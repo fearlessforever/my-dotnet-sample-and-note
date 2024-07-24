@@ -1,4 +1,5 @@
 
+using Fearlessforever.Api.Core.AppCancelToken;
 using Fearlessforever.Shared.Utils;
 using Hangfire;
 
@@ -18,8 +19,11 @@ public class SampleQueueService : ISampleQueueService
 
   public async Task ExecuteAsync(string message, DateTime dateTime)
   {
+    // in case application stopping is signaled and need to cancel all remaining process
+    var appCancelToken = AppCancelTokenService.CancelTokenSource.Token;
+    
     var delay = Random.Shared.Next(3,5);
-    await Task.Delay(delay * 1000);
+    await Task.Delay(delay * 1000 , appCancelToken);
     DebugHelper.Log($"Task Finished in {delay} seconds. Message: {message} Time: {dateTime}" , "Background Task / Scheduler");
   }
 }
