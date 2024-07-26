@@ -401,6 +401,52 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Sample SSE",
+			"item": [
+				{
+					"name": "SSE Page Open in Browser : http://localhost:5000/assets/html/sample-sse.html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/assets/html/sample-sse.html",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"assets",
+								"html",
+								"sample-sse.html"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	]
 }
