@@ -6,6 +6,7 @@ using Fearlessforever.Api.Core.Logging;
 using Fearlessforever.Api.Core.Queue;
 using Fearlessforever.Api.Core.RateLimiter;
 using Fearlessforever.Api.Core.Routes;
+using Fearlessforever.Api.Core.SignalR;
 using Fearlessforever.Api.Modules.Sample;
 using Fearlessforever.Api.Modules.SampleQueue;
 
@@ -26,6 +27,7 @@ builder.Services.AddCoreRateLimiter();
 builder.Services.AddCoreHandleException();
 builder.Services.AddCoreCacheProviders(builder.Configuration);
 builder.Services.AddCoreQueueService(builder.Configuration);
+builder.Services.AddCoreSignalR(builder.Configuration);
 builder.Host.AddCoreLogging();
 //========================================================
 
@@ -52,7 +54,7 @@ app.UseCoreAppCancelToken();
 app.UseCoreConfigsLogHelper();
 app.UseCoreRateLimiter();
 app.UseCoreHandleException();
-app.UseCoreRoutesMinimalApi();
+app.UseCoreRoutesMinimalApi(app.Configuration);
 app.UseCoreQueueDashboard();
 //=========================================================
 
