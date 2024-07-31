@@ -32,6 +32,10 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
+      - name: Move Position To WebApi Application
+        run: |
+          cd ./App-Api
+
       - name: Restore and Build for .NET SDK 7.0
         run: |
           dotnet build
@@ -68,6 +72,10 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+
+      - name: Move Position To WebApi Application
+        run: |
+          cd App-Api
 
       - name: Restore and Build for .NET SDK 7.0
         run: |
