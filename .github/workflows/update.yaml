@@ -82,7 +82,7 @@ jobs:
       - name: Move Position To WebApi Application
         run: |
           cd App-Api
-          dir -a
+          dir
 
       - name: Restore and Build for .NET SDK 7.0
         working-directory: ./App-Api
