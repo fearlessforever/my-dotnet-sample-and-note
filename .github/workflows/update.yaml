@@ -39,19 +39,20 @@ jobs:
 
       - name: Restore and Build for .NET SDK 7.0
         run: |
-          dotnet build -v WebApi.csproj
+          dotnet build WebApi.csproj -v d
       # dotnet test --no-build
 
       - name: Restore and Build for .NET SDK 8.0
         run: |
-          dotnet build -p:NetCoreTargetFramework=net8.0  -v WebApi.csproj
+          dotnet build -p:NetCoreTargetFramework=net8.0  WebApi.csproj -v d
       # dotnet test -p:NetCoreTargetFramework=net8.0 --no-build
 
       - name: Restore and Build for .NET SDK 9.0
         run: |
-          dotnet build -p:NetCoreTargetFramework=net9.0  -v WebApi.csproj
+          dotnet build -p:NetCoreTargetFramework=net9.0  WebApi.csproj -v d
 
   test-build-windows:
+    needs: test-build-linux
     runs-on: windows-latest
 
     steps:
@@ -81,14 +82,14 @@ jobs:
 
       - name: Restore and Build for .NET SDK 7.0
         run: |
-          dotnet build -v WebApi.csproj
+          dotnet build WebApi.csproj -v d
       # dotnet test --no-build
 
       - name: Restore and Build for .NET SDK 8.0
         run: |
-          dotnet build -p:NetCoreTargetFramework=net8.0 -v WebApi.csproj
+          dotnet build -p:NetCoreTargetFramework=net8.0 WebApi.csproj -v d
       # dotnet test -p:NetCoreTargetFramework=net8.0 --no-build
 
       - name: Restore and Build for .NET SDK 9.0
         run: |
-          dotnet build -p:NetCoreTargetFramework=net9.0 -v WebApi.csproj
+          dotnet build -p:NetCoreTargetFramework=net9.0 WebApi.csproj -v d
