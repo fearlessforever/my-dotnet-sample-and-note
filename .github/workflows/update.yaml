@@ -38,6 +38,7 @@ jobs:
           ls -lsa
 
       - name: Restore and Build for .NET SDK 7.0
+        working-directory: ./App-Api
         run: |
           dotnet build WebApi.csproj -v d
       # dotnet test --no-build
