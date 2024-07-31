@@ -39,17 +39,17 @@ jobs:
 
       - name: Restore and Build for .NET SDK 7.0
         run: |
-          dotnet build
+          dotnet build -v WebApi.csproj
       # dotnet test --no-build
 
       - name: Restore and Build for .NET SDK 8.0
         run: |
-          dotnet build -p:NetCoreTargetFramework=net8.0
+          dotnet build -p:NetCoreTargetFramework=net8.0  -v WebApi.csproj
       # dotnet test -p:NetCoreTargetFramework=net8.0 --no-build
 
       - name: Restore and Build for .NET SDK 9.0
         run: |
-          dotnet build -p:NetCoreTargetFramework=net9.0
+          dotnet build -p:NetCoreTargetFramework=net9.0  -v WebApi.csproj
 
   test-build-windows:
     runs-on: windows-latest
@@ -77,18 +77,18 @@ jobs:
       - name: Move Position To WebApi Application
         run: |
           cd App-Api
-          dir -A
+          dir -a
 
       - name: Restore and Build for .NET SDK 7.0
         run: |
-          dotnet build
+          dotnet build -v WebApi.csproj
       # dotnet test --no-build
 
       - name: Restore and Build for .NET SDK 8.0
         run: |
-          dotnet build -p:NetCoreTargetFramework=net8.0
+          dotnet build -p:NetCoreTargetFramework=net8.0 -v WebApi.csproj
       # dotnet test -p:NetCoreTargetFramework=net8.0 --no-build
 
       - name: Restore and Build for .NET SDK 9.0
         run: |
-          dotnet build -p:NetCoreTargetFramework=net9.0
+          dotnet build -p:NetCoreTargetFramework=net9.0 -v WebApi.csproj
