@@ -33,27 +33,28 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Move Position To WebApi Application
-        run: |
-          cd ./App-Api
-          ls -lsa
+      # - name: Move Position To WebApi Application
+      #   run: |
+      #     cd ./App-Api
+      #     ls -lsa
 
       - name: Restore and Build for .NET SDK 7.0
         working-directory: ./App-Api
         run: |
-          dotnet build WebApi.csproj -v d
+          dotnet build WebApi.csproj -f net7.0 
       # dotnet test --no-build
 
       - name: Restore and Build for .NET SDK 8.0
         working-directory: ./App-Api
         run: |
-          dotnet build -p:NetCoreTargetFramework=net8.0  WebApi.csproj -v d
+          dotnet build -p:NetCoreTargetFramework=net8.0  WebApi.csproj -f net8.0 
       # dotnet test -p:NetCoreTargetFramework=net8.0 --no-build
 
       - name: Restore and Build for .NET SDK 9.0
         working-directory: ./App-Api
         run: |
-          dotnet build -p:NetCoreTargetFramework=net9.0  WebApi.csproj -v d
+          ls -lsa
+          dotnet build -p:NetCoreTargetFramework=net9.0  WebApi.csproj -f net9.0 
 
   test-build-windows:
     # needs: test-build-linux
@@ -79,24 +80,24 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Move Position To WebApi Application
-        run: |
-          cd App-Api
-          dir
+      # - name: Move Position To WebApi Application
+      #   run: |
+      #     cd App-Api
+      #     dir
 
       - name: Restore and Build for .NET SDK 7.0
         working-directory: ./App-Api
         run: |
-          dotnet build WebApi.csproj -v d
+          dotnet build WebApi.csproj -f net7.0 
       # dotnet test --no-build
 
       - name: Restore and Build for .NET SDK 8.0
         working-directory: ./App-Api
         run: |
-          dotnet build -p:NetCoreTargetFramework=net8.0 WebApi.csproj -v d
+          dotnet build -p:NetCoreTargetFramework=net8.0 WebApi.csproj -f net8.0 
       # dotnet test -p:NetCoreTargetFramework=net8.0 --no-build
 
       - name: Restore and Build for .NET SDK 9.0
         working-directory: ./App-Api
         run: |
-          dotnet build -p:NetCoreTargetFramework=net9.0 WebApi.csproj -v d
+          dotnet build -p:NetCoreTargetFramework=net9.0 WebApi.csproj -f net9.0 
