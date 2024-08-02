@@ -7,8 +7,8 @@
 - [x] How to Handle Exception [PR #13](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/13)
 - [ ] Sample Database Connection , Migration , Seeder and Sample how to use
 - [x] Sample Hybrid Cache ( in-app memory & optional Redis Connection ) [PR #14](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/14)
-- [ ] Sample Generate Docker Image For Production
-- [ ] Sample Github Action ( CI/CD ) [PR #26](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/26)
+- [x] Sample Generate Docker Image For Production [PR #27](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/27)
+- [x] Sample Github Action ( CI/CD ) [PR #26](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/26)
 - [x] Sample Task Scheduling / Queue [PR #22](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/22)
 - [x] Sample How to Use Secret Configuration [PR #22](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/22)
 - [ ] Sample Sending Email
@@ -47,6 +47,12 @@ $ ./run Api build -bl:output.binlog -p:NetCoreTargetFramework=net8.0
 $ ./run Api build -bl:output.binlog -p:NetCoreTargetFramework=net9.0
 ```
 
+## Build & Running the app in docker [Production]
+```bash
+$ ./run build-docker
+$ ./run run-docker
+$ ./run stop-docker
+```
 
 ## Required & Optional
 - .NET 7 SDK & Runtime
