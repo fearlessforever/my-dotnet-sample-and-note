@@ -5,6 +5,7 @@ declare -A commands=(
   ['Api-Binlog']=Api-Binlog
   ['run-docker']=run-docker
   ['stop-docker']=stop-docker
+  ['build-docker']=build-docker
 );
 
 selectedCMD=$1
@@ -12,19 +13,21 @@ selectedCMD=$1
 if [[ $# -gt 0 && ${commands[$selectedCMD]} ]]; then
     shift
     if [[ ${commands[$selectedCMD]} ]]; then
-      isWatch=false
-      isBuild=false
-
-      if [[ $1 == 'watch' ]]; then
-        shift
-        isWatch=true
-      fi
-      if [[ $1 == 'build' ]]; then
-        shift
-        isBuild=true
-      fi
 
       if [[ $selectedCMD == 'Api' ]]; then
+        # Certain Condition
+        isWatch=false
+        isBuild=false
+
+        if [[ $1 == 'watch' ]]; then
+          shift
+          isWatch=true
+        fi
+        if [[ $1 == 'build' ]]; then
+          shift
+          isBuild=true
+        fi
+
         if [[ $isWatch == true ]];then
           ( cd ./App-Api && dotnet watch run "$@" )
         elif [[ $isBuild == true ]];then
@@ -39,14 +42,18 @@ if [[ $# -gt 0 && ${commands[$selectedCMD]} ]]; then
         ( cd ./App-Api && dotnet build -bl:output.binlog "$@" )
       fi
 
-      # if [[ $selectedCMD == 'run-docker' ]]; then
-      #   docker build -f docker/dockerfile -t my-nestjs:latest . --progress=plain --network=host
-      #   docker-compose -f docker/docker-compose.yml up -d
-      # fi
+      if [[ $selectedCMD == 'build-docker' ]]; then
+        docker build -f docker/dockerfile -t dotnet-web-api:latest . --progress=plain --network=host
+      fi
 
-      # if [[ $selectedCMD == 'stop-docker' ]]; then
-      #   docker-compose -f docker/docker-compose.yml down
-      # fi
+      if [[ $selectedCMD == 'run-docker' ]]; then
+        # docker build -f docker/dockerfile -t dotnet-web-api:latest . --progress=plain --network=host
+        docker-compose -f docker/docker-compose.yml up -d
+      fi
+
+      if [[ $selectedCMD == 'stop-docker' ]]; then
+        docker-compose -f docker/docker-compose.yml down
+      fi
 
     else
       echo ""
