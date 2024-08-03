@@ -6,7 +6,7 @@ on:
   #     - update
   pull_request:
     branches:
-      - development
+      - developmentz
 
 jobs:
   test-build-linux:
