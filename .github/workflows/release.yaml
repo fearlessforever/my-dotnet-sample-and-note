@@ -67,15 +67,15 @@ jobs:
       - name: Create release artifact (e.g., a zip file)
         run: zip -r dotnet-web-api.zip api/ README.md # Adjust based on your project's output
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_RELEASE_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./dotnet-web-api.zip
-          asset_name: dotnet-web-api-${{ github.event.release.tag_name }}.zip
-          asset_content_type: application/zip
+      # - name: Upload Release Asset
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.MY_RELEASE_TOKEN }}
+      #   with:
+      #     upload_url: ${{ github.event.release.upload_url }}
+      #     asset_path: ./dotnet-web-api.zip
+      #     asset_name: dotnet-web-api-${{ github.event.release.tag_name }}.zip
+      #     asset_content_type: application/zip
 
   build-and-publish-package:
     needs: test-build-and-release
