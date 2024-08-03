@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0 as build
+WORKDIR /build-app
+COPY . .
+
+RUN mkdir /compiled-app
+
+# Compile WebApi App
+RUN cd App-Api/ && dotnet restore -p:NetCoreTargetFramework=net9.0 && dotnet publish -p:NetCoreTargetFramework=net9.0 WebApi.csproj -f net9.0 -c Release -o /compiled-app/webapi
+
+# build for production use minimize runtime
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 as runtime
+WORKDIR /app
+
+COPY --from=build /compiled-app /app
+# ENTRYPOINT [ "dotnet", "/app/MyApp.dll" ]
