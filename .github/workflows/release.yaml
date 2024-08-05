@@ -62,10 +62,10 @@ jobs:
         working-directory: ./App-Api
         run: |
           ls -lsa
-          dotnet publish -p:NetCoreTargetFramework=net9.0 WebApi.csproj -f net9.0 -c Release -o ./api
+          dotnet publish -p:NetCoreTargetFramework=net9.0 WebApi.csproj -f net9.0 -c Release -o ../dist/api --self-contained true -r linux-x64
 
       - name: Create release artifact (e.g., a zip file)
-        run: zip -r dotnet-web-api.zip api/ README.md # Adjust based on your project's output
+        run: zip -r dotnet-web-api.zip dist/api/ README.md # Adjust based on your project's output
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
@@ -74,7 +74,7 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./dotnet-web-api.zip
-          asset_name: dotnet-web-api-${{ github.event.release.tag_name }}.zip
+          asset_name: dotnet-web-api-net9-${{ github.event.release.tag_name }}-linux-x64.zip
           asset_content_type: application/zip
 
   build-and-publish-package:
