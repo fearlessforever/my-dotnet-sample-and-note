@@ -23,43 +23,80 @@ public static partial class ApplicationServiceExtensions
 
   public static void UseCoreHandleException(this IApplicationBuilder applicationBuilder)
   {
-    applicationBuilder.UseExceptionHandler(builder=>
-    {
-#if NET7_0
+#if NET8_0_OR_GREATER
+    ExceptionHandlerOptions exceptionHandlerOptions = new();
+#endif
 
-      builder.Run(async context =>
+#if NET7_0
+    ExceptionHandlerOptions exceptionHandlerOptions = new()
+    {
+      ExceptionHandler = async context =>
       {
-        Exception? readException = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
+        Exception? exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
         var logger = context.RequestServices.GetService<ILogger<object>>();
         var result = new MyApiResponse
         {
           Code = StatusCodes.Status500InternalServerError,
-          Message = readException?.Message ?? "Unhandle Error has occured",
+          Message = "Unhandle Error has occured",
           Status = "error",
         };
 
-        logger?.LogError("Unhandle Error : {error} " , result );
+        if (exception is not null) {
+          result.Message = exception.Message;
+          ICollection<string> errors =[];
+          
+          if (!string.IsNullOrEmpty(exception.InnerException?.Message) && exception.Message != exception.InnerException.Message)
+            errors.Add(exception.InnerException.Message);
 
-        await context.Response.WriteAsJsonAsync(result);
+          result.Errors = errors;
+        }
 
-        // var problemDetailService = context.RequestServices.GetService<IProblemDetailsService>();
-        // if (problemDetailService != null)
-        // {
-        //   await problemDetailService.WriteAsync(new ProblemDetailsContext
-        //   {
-        //     HttpContext = context,
-        //     ProblemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
-        //     {
-        //       Type = readException?.GetType().Name ?? "Unknown error source",
-        //       Title = "an error occured",
-        //       Detail = readException?.Message ?? "Unhandle Error has occured",
-        //     }
-        //   });
-        // }
-        
-      });
-        
+        logger?.LogError("Unhandle Error : {error} ", result);
+
+        await context.Response.WriteAsJsonAsync(result , context.RequestAborted);
+      }
+    };
+
 #endif
-    });
+    applicationBuilder.UseExceptionHandler(exceptionHandlerOptions);
+
+//     applicationBuilder.UseExceptionHandler(builder=>
+//     {
+// #if NET7_0
+
+//       builder.Run(async context =>
+//       {
+//         Exception? readException = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
+//         var logger = context.RequestServices.GetService<ILogger<object>>();
+//         var result = new MyApiResponse
+//         {
+//           Code = StatusCodes.Status500InternalServerError,
+//           Message = readException?.Message ?? "Unhandle Error has occured",
+//           Status = "error",
+//         };
+
+//         logger?.LogError("Unhandle Error : {error} " , result );
+
+//         await context.Response.WriteAsJsonAsync(result);
+
+//         // var problemDetailService = context.RequestServices.GetService<IProblemDetailsService>();
+//         // if (problemDetailService != null)
+//         // {
+//         //   await problemDetailService.WriteAsync(new ProblemDetailsContext
+//         //   {
+//         //     HttpContext = context,
+//         //     ProblemDetails = new Microsoft.AspNetCore.Mvc.ProblemDetails
+//         //     {
+//         //       Type = readException?.GetType().Name ?? "Unknown error source",
+//         //       Title = "an error occured",
+//         //       Detail = readException?.Message ?? "Unhandle Error has occured",
+//         //     }
+//         //   });
+//         // }
+        
+//       });
+        
+// #endif
+//     });
   }
 }
