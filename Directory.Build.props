@@ -39,6 +39,14 @@
     <WebApplicationsTargetPath>$(MSBuildThisFileDirectory)eng\msbuild\web\WebApplications\Microsoft.WebApplication.targets</WebApplicationsTargetPath>
   </PropertyGroup>
 
+  <!-- 
+    Reference : https://github.com/dotnet/efcore/issues/23853#issuecomment-2491134216
+
+    To use dotnet ef without 'msbuildprojectextensionspath'
+  -->
+  <Import Condition="Exists('$(MSBuildProjectDirectory)\obj\$(MSBuildProjectFile).EntityFrameworkCore.targets')"
+          Project="$(MSBuildProjectDirectory)\obj\$(MSBuildProjectFile).EntityFrameworkCore.targets"/>
+
   <PropertyGroup>
     <!-- <NetFrameworkTargetFramework
       Condition=" '$(NetFrameworkTargetFramework)' == '' ">net48</NetFrameworkTargetFramework> -->
