@@ -8,6 +8,14 @@
 			"name": "Shared",
 			"path": "Shared"
 		},
+		{
+			"name": "Databases",
+			"path": "Databases"
+		},
+		{
+			"name": "Databases.Shared",
+			"path": "Databases.Shared"
+		},
 	],
 	"settings": {
 		"files.exclude": {
