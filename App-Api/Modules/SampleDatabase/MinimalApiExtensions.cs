@@ -1,5 +1,7 @@
 
 using static Fearlessforever.Api.Modules.SampleDatabase.Sqlite.MinimalApiExtensions;
+using static Fearlessforever.Api.Modules.SampleDatabase.InMemory.MinimalApiExtensions;
+using static Fearlessforever.Api.Modules.SampleDatabase.PostgreSql.MinimalApiExtensions;
 
 namespace Fearlessforever.Api.Modules.SampleDatabase;
 
@@ -10,6 +12,8 @@ public static partial class MinimalApiExtensions
     var sampleDatabases = endpoints.MapGroup("SampleDatabase");
 
     MapMiniApiSampleDatabaseSqlite(sampleDatabases);
+    MapMiniApiSampleDatabaseInMemory(sampleDatabases);
+    MapMiniApiSampleDatabasePostgreSql(sampleDatabases);
 
     return sampleDatabases;
   }
