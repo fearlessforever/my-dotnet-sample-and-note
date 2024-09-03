@@ -88,9 +88,9 @@ public static partial class ApplicationServiceExtensions
     if (FeaturesConfig.UseDatabaseInMemory)
     {
       DebugHelper.Log("InMemory is loaded", "Database Configuration");
-      services.AddDbContextPool<AppInMemoryContext>(options =>
+      services.AddDbContextPool<AppInMemoryContext>((provider, options) =>
       {
-        options.UseInMemoryDatabase("DbNameInMemory");
+        options.UseInMemoryDatabase("DbNameInMemory").AddInterceptors(provider.GetRequiredService<MySaveChangesInterceptorSingleton>());
       });
     }
     else
@@ -222,12 +222,26 @@ public static partial class ApplicationServiceExtensions
     ///
     /// Register Databases Entities Services
     ///
+    
+    // Sqlite
     services.AddScopedFeatureFlag<AuthorService>();
     services.AddScopedFeatureFlag<BlogService>();
     services.AddScopedFeatureFlag<SqliteKeyByteItemService>();
     services.AddScopedFeatureFlag<SqliteKeyStringItemService>();
     services.AddScopedFeatureFlag<SqliteKeyGuidItemService>();
     services.AddScopedFeatureFlag<ViewSqliteKeyService>();
+
+    // InMemory
+    services.AddScopedFeatureFlag<InMemoryKeyIntItemService>();
+    services.AddScopedFeatureFlag<InMemoryKeyGuidItemService>();
+    services.AddScopedFeatureFlag<InMemoryKeyByteItemService>();
+
+    // Postgre-SQL
+    services.AddScopedFeatureFlag<ProjectService>();
+    services.AddScopedFeatureFlag<TicketService>();
+    services.AddScopedFeatureFlag<PostgreKeyByteItemService>();
+    services.AddScopedFeatureFlag<PostgreKeyGuidItemService>();
+    services.AddScopedFeatureFlag<ViewPostgreKeyService>();
     
   }
   
