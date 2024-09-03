@@ -6,6 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Fearlessforever.Api</RootNamespace>
     <UserSecretsId>0dd1fe3d-7eae-4c4a-b71c-8833f654c4a4</UserSecretsId>
+
+    <!-- <PublishAot>true</PublishAot>
+    <IsAotCompatible>true</IsAotCompatible>
+    <StripSymbols>false</StripSymbols> -->
   </PropertyGroup>
 
   <!--
