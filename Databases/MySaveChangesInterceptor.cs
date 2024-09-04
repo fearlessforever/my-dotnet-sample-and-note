@@ -60,11 +60,22 @@ public class MySaveChangesInterceptor : SaveChangesInterceptor
 
       ModifyStateValue(currentEntity, entry);
     }
+    // ====================================================================
+    Type deleteAbleIdByte = typeof(BaseEntitySoftDelete<byte[]>);
+    entityEntries = eventData.Context.ChangeTracker.Entries().Where(e => e.Entity.GetType().BaseType == deleteAbleIdByte);
+
+    foreach (var entry in entityEntries)
+    {
+      var currentEntity = (BaseEntitySoftDelete<byte[]>)entry.Entity;
+      if (currentEntity is null) continue;
+
+      ModifyStateValue(currentEntity, entry);
+    }
 
     return base.SavingChangesAsync(eventData, result, cancellationToken);
   }
 
-  private static void ModifyStateValue<T>(BaseEntitySoftDelete<T> currentEntity, EntityEntry entry) where T : struct
+  private static void ModifyStateValue<T>(BaseEntitySoftDelete<T> currentEntity, EntityEntry entry) where T : notnull
   {
     if (entry.State == EntityState.Deleted)
     {
@@ -75,6 +86,7 @@ public class MySaveChangesInterceptor : SaveChangesInterceptor
     }
     else if (entry.State == EntityState.Added)
     {
+      currentEntity.DateCreated = DateTime.UtcNow;
       currentEntity.CreatedBy = "[System]";
     }
     else if (entry.State == EntityState.Modified)
@@ -84,23 +96,24 @@ public class MySaveChangesInterceptor : SaveChangesInterceptor
     }
   }
 
-  private static void ModifyStateValue<T>(T currentEntity, EntityEntry entry) where T : BaseEntitySoftDelete<string>
-  {
-    if (entry.State == EntityState.Deleted)
-    {
-      entry.State = EntityState.Modified;
+  // private static void ModifyStateValue<T>(T currentEntity, EntityEntry entry) where T : BaseEntitySoftDelete<string>
+  // {
+  //   if (entry.State == EntityState.Deleted)
+  //   {
+  //     entry.State = EntityState.Modified;
 
-      currentEntity.MarkAsDeleted();
-      currentEntity.DeletedBy = "[System]";
-    }
-    else if (entry.State == EntityState.Added)
-    {
-      currentEntity.CreatedBy = "[System]";
-    }
-    else if (entry.State == EntityState.Modified)
-    {
-      currentEntity.DateUpdated = DateTime.UtcNow;
-      currentEntity.UpdatedBy = "[System]";
-    }
-  }
+  //     currentEntity.MarkAsDeleted();
+  //     currentEntity.DeletedBy = "[System]";
+  //   }
+  //   else if (entry.State == EntityState.Added)
+  //   {
+  //     currentEntity.DateCreated = DateTime.UtcNow;
+  //     currentEntity.CreatedBy = "[System]";
+  //   }
+  //   else if (entry.State == EntityState.Modified)
+  //   {
+  //     currentEntity.DateUpdated = DateTime.UtcNow;
+  //     currentEntity.UpdatedBy = "[System]";
+  //   }
+  // }
 }
