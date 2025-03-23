@@ -1,7 +1,7 @@
 using Fearlessforever.Databases.Shared.Models.Testing;
+using Fearlessforever.Databases.Utils;
 using Fearlessforever.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Fearlessforever.Databases.Contexts.Configurations.PostgreSql;
@@ -43,15 +43,5 @@ public class ViewPostgreKeyItemConfig : IEntityTypeConfiguration<ViewPostgreKeyI
     builder.HasNoKey();
     // builder.Property(x => x.CreatedBy).HasColumnName("CREATED_BY");
     // builder.Property(x => x.Id).HasConversion<BytesToBase64StringConverter>();
-  }
-}
-
-internal sealed class GeneratorByteIdValueGenerator : Microsoft.EntityFrameworkCore.ValueGeneration.ValueGenerator<byte[]>
-{
-  public override bool GeneratesTemporaryValues => false;
-
-  public override byte[] Next(EntityEntry entry)
-  {
-    return MySecurityHelper.GenerateUUID().ToByteArray();
   }
 }
