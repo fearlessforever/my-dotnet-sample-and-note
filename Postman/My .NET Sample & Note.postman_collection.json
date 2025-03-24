@@ -1022,423 +1022,443 @@
 									}
 								}
 							]
-						}
-					]
-				},
-				{
-					"name": "Db: Sqlite TestingUniqueKey",
-					"item": [
-						{
-							"name": "ViewSqliteKeyItem List",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/ViewSqliteKeyItem?Page=1",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"ViewSqliteKeyItem"
-									],
-									"query": [
-										{
-											"key": "Page",
-											"value": "1"
-										},
-										{
-											"key": "ItemsPerPage",
-											"value": "500",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
 						},
 						{
-							"name": "Get List ( Key byte[] in db )",
-							"event": [
+							"name": "UniqueKey",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"if(pm.response.code == 200){",
-											"    const getRandomNumber = function(min, max) {",
-											"        return Math.round(Math.random() * (max - min) + min);",
-											"    }",
-											"    const dataJson = pm.response.json()",
-											"    const {data} = dataJson",
-											"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
-											"    if( selected ){",
-											"        pm.environment.set(\"sample_sqlite_byte_id\",selected.id)",
-											"    }",
-											"    ",
-											"}"
-										],
-										"type": "text/javascript"
-									}
+									"name": "ViewSqliteKeyItem List",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/ViewSqliteKeyItem?Page=1",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"ViewSqliteKeyItem"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "1"
+												},
+												{
+													"key": "ItemsPerPage",
+													"value": "500",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get List ( Key byte[] in db )",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const getRandomNumber = function(min, max) {",
+													"        return Math.round(Math.random() * (max - min) + min);",
+													"    }",
+													"    const dataJson = pm.response.json()",
+													"    const {data} = dataJson",
+													"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_sqlite_byte_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyByteItem?Page=1&ItemsPerPage=50",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyByteItem"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "1"
+												},
+												{
+													"key": "ItemsPerPage",
+													"value": "50"
+												},
+												{
+													"key": "Keyword",
+													"value": "updated",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get By Id ( Key byte[] in db )",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyByteItem/ById?Id={{sample_sqlite_byte_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyByteItem",
+												"ById"
+											],
+											"query": [
+												{
+													"key": "Id",
+													"value": "{{sample_sqlite_byte_id}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create ( Key byte[] in db )",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const dataJson = pm.response.json()",
+													"    const selected = dataJson.data",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_sqlite_byte_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\":\"Testing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyByteItem",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyByteItem"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get List ( Key Guid in db )",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const getRandomNumber = function(min, max) {",
+													"        return Math.round(Math.random() * (max - min) + min);",
+													"    }",
+													"    const dataJson = pm.response.json()",
+													"    const {data} = dataJson",
+													"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_sqlite_guid_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyGuidItem?Page=1&ItemsPerPage=50",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyGuidItem"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "1"
+												},
+												{
+													"key": "ItemsPerPage",
+													"value": "50"
+												},
+												{
+													"key": "Keyword",
+													"value": "updated",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get By Id ( Key Guid in db )",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyGuidItem/{{sample_sqlite_guid_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyGuidItem",
+												"{{sample_sqlite_guid_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create ( Key Guid in db )",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const dataJson = pm.response.json()",
+													"    const selected = dataJson.data",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_sqlite_guid_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\":\"Testing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyGuidItem",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyGuidItem"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get List ( Key String in db )",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const getRandomNumber = function(min, max) {",
+													"        return Math.round(Math.random() * (max - min) + min);",
+													"    }",
+													"    const dataJson = pm.response.json()",
+													"    const {data} = dataJson",
+													"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_sqlite_string_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyStringItem?Page=1&ItemsPerPage=50",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyStringItem"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "1"
+												},
+												{
+													"key": "ItemsPerPage",
+													"value": "50"
+												},
+												{
+													"key": "Keyword",
+													"value": "updated",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get By Id ( Key String in db )",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyStringItem/{{sample_sqlite_string_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyStringItem",
+												"{{sample_sqlite_string_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create ( Key String in db )",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const dataJson = pm.response.json()",
+													"    const selected = dataJson.data",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_sqlite_string_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\":\"Testing\",\n    \"id\":\"string-must-be-unique-4\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyStringItem",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"Sqlite",
+												"SqliteKeyStringItem"
+											]
+										}
+									},
+									"response": []
 								}
 							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyByteItem?Page=1&ItemsPerPage=50",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyByteItem"
-									],
-									"query": [
-										{
-											"key": "Page",
-											"value": "1"
-										},
-										{
-											"key": "ItemsPerPage",
-											"value": "50"
-										},
-										{
-											"key": "Keyword",
-											"value": "updated",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get By Id ( Key byte[] in db )",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyByteItem/ById?Id={{sample_sqlite_byte_id}}",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyByteItem",
-										"ById"
-									],
-									"query": [
-										{
-											"key": "Id",
-											"value": "{{sample_sqlite_byte_id}}"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create ( Key byte[] in db )",
 							"event": [
 								{
-									"listen": "test",
+									"listen": "prerequest",
 									"script": {
+										"type": "text/javascript",
 										"exec": [
-											"if(pm.response.code == 200){",
-											"    const dataJson = pm.response.json()",
-											"    const selected = dataJson.data",
-											"    if( selected ){",
-											"        pm.environment.set(\"sample_sqlite_byte_id\",selected.id)",
-											"    }",
-											"    ",
-											"}"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\":\"Testing\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
+											""
+										]
 									}
 								},
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyByteItem",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyByteItem"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get List ( Key Guid in db )",
-							"event": [
 								{
 									"listen": "test",
 									"script": {
+										"type": "text/javascript",
 										"exec": [
-											"if(pm.response.code == 200){",
-											"    const getRandomNumber = function(min, max) {",
-											"        return Math.round(Math.random() * (max - min) + min);",
-											"    }",
-											"    const dataJson = pm.response.json()",
-											"    const {data} = dataJson",
-											"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
-											"    if( selected ){",
-											"        pm.environment.set(\"sample_sqlite_guid_id\",selected.id)",
-											"    }",
-											"    ",
-											"}"
-										],
-										"type": "text/javascript"
+											""
+										]
 									}
 								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyGuidItem?Page=1&ItemsPerPage=50",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyGuidItem"
-									],
-									"query": [
-										{
-											"key": "Page",
-											"value": "1"
-										},
-										{
-											"key": "ItemsPerPage",
-											"value": "50"
-										},
-										{
-											"key": "Keyword",
-											"value": "updated",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get By Id ( Key Guid in db )",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyGuidItem/{{sample_sqlite_guid_id}}",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyGuidItem",
-										"{{sample_sqlite_guid_id}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create ( Key Guid in db )",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"if(pm.response.code == 200){",
-											"    const dataJson = pm.response.json()",
-											"    const selected = dataJson.data",
-											"    if( selected ){",
-											"        pm.environment.set(\"sample_sqlite_guid_id\",selected.id)",
-											"    }",
-											"    ",
-											"}"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\":\"Testing\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyGuidItem",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyGuidItem"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get List ( Key String in db )",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"if(pm.response.code == 200){",
-											"    const getRandomNumber = function(min, max) {",
-											"        return Math.round(Math.random() * (max - min) + min);",
-											"    }",
-											"    const dataJson = pm.response.json()",
-											"    const {data} = dataJson",
-											"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
-											"    if( selected ){",
-											"        pm.environment.set(\"sample_sqlite_string_id\",selected.id)",
-											"    }",
-											"    ",
-											"}"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyStringItem?Page=1&ItemsPerPage=50",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyStringItem"
-									],
-									"query": [
-										{
-											"key": "Page",
-											"value": "1"
-										},
-										{
-											"key": "ItemsPerPage",
-											"value": "50"
-										},
-										{
-											"key": "Keyword",
-											"value": "updated",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get By Id ( Key String in db )",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyStringItem/{{sample_sqlite_string_id}}",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyStringItem",
-										"{{sample_sqlite_string_id}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create ( Key String in db )",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"if(pm.response.code == 200){",
-											"    const dataJson = pm.response.json()",
-											"    const selected = dataJson.data",
-											"    if( selected ){",
-											"        pm.environment.set(\"sample_sqlite_string_id\",selected.id)",
-											"    }",
-											"    ",
-											"}"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\":\"Testing\",\n    \"id\":\"string-must-be-unique-4\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{base_url}}/v1/SampleDatabase/Sqlite/SqliteKeyStringItem",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"v1",
-										"SampleDatabase",
-										"Sqlite",
-										"SqliteKeyStringItem"
-									]
-								}
-							},
-							"response": []
+							]
 						}
 					]
 				},
@@ -2330,7 +2350,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"name\": \"Test Ticket\",\n  \"description\": \"Test Ticket Description\",\n  \"owner\": \"Test Owner\",\n  \"dueDate\": \"2025-11-29T15:19:06.620Z\",\n  \"projectId\": 1\n}",
+											"raw": "{\n  \"name\": \"Test Ticket\",\n  \"description\": \"Test Ticket Description\",\n  \"owner\": \"Test Owner\",\n  \"dueDate\": \"2026-01-29T15:19:06.620Z\",\n  \"projectId\": {{sample_postgre_project_id}}\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -3015,6 +3035,927 @@
 										}
 									},
 									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Db: Ms-SQL",
+					"item": [
+						{
+							"name": "Book",
+							"item": [
+								{
+									"name": "Get List",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const getRandomNumber = function(min, max) {",
+													"        return Math.round(Math.random() * (max - min) + min);",
+													"    }",
+													"    const dataJson = pm.response.json()",
+													"    const {data} = dataJson",
+													"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_mssql_book_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/Book",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"Book"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "1",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/Book/{{sample_mssql_book_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"Book",
+												"{{sample_mssql_book_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update By Id",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\":\"Updated: Test Title\",\n    \"authorName\":\"Updated: Test Author Name\",\n    \"description\":\"Updated: Test Description\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/Book/{{sample_mssql_book_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"Book",
+												"{{sample_mssql_book_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const dataJson = pm.response.json()",
+													"    const selected = dataJson.data",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_mssql_book_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\":\"Test Title\",\n    \"authorName\":\"Test Author Name\",\n    \"description\":\"Test Description\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/Book",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"Book"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete By Id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/Book/{{sample_mssql_book_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"Book",
+												"{{sample_mssql_book_id}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Book Category",
+							"item": [
+								{
+									"name": "Get List",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const getRandomNumber = function(min, max) {",
+													"        return Math.round(Math.random() * (max - min) + min);",
+													"    }",
+													"    const dataJson = pm.response.json()",
+													"    const {data} = dataJson",
+													"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_mssql_bookcategory_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategory",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategory"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "1",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategory/{{sample_mssql_bookcategory_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategory",
+												"{{sample_mssql_bookcategory_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update By Id",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\":\"Updated: Test Name\",\n    \"bookId\":{{sample_mssql_book_id}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategory/{{sample_mssql_bookcategory_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategory",
+												"{{sample_mssql_bookcategory_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const dataJson = pm.response.json()",
+													"    const selected = dataJson.data",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_mssql_bookcategory_id\",selected.id)",
+													"    }",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\":\"Test Name\",\n    \"bookId\":{{sample_mssql_book_id}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategory",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategory"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete By Id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategory/{{sample_mssql_bookcategory_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategory",
+												"{{sample_mssql_bookcategory_id}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Book Category & Book Same time",
+							"item": [
+								{
+									"name": "Get By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategoryAndBook/{{sample_mssql_bookcategory_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategoryAndBook",
+												"{{sample_mssql_bookcategory_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"if(pm.response.code == 200){",
+													"    const dataJson = pm.response.json()",
+													"    const selected = dataJson.data",
+													"    if( selected ){",
+													"        pm.environment.set(\"sample_mssql_bookcategory_id\",selected.id)",
+													"        if( selected.author ){",
+													"            pm.environment.set(\"sample_mssql_book_id\",selected.book.id)",
+													"        }",
+													"    }",
+													"    ",
+													"    ",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"Test Category Name\",\n  \"book\":{\n      \"description\":\"Test Book Description\",\n      \"title\":\"Test Book Title\",\n      \"authorName\":\"Test Book Author Name\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategoryAndBook",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategoryAndBook"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update By Id",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"Updated: Test Category Name\",\n  \"book\":{\n      \"description\":\"Updated: Test Book Description\",\n      \"authorName\":\"Updated: Test Book Author Name\",\n      \"title\": \"Updated: Test Book Title\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategoryAndBook/not-transaction/{{sample_mssql_bookcategory_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategoryAndBook",
+												"not-transaction",
+												"{{sample_mssql_bookcategory_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update By Id With Transaction",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"Updated: Test Category Name\",\n  \"book\":{\n      \"description\":\"Updated: Test Book Description\",\n      \"authorName\":\"Updated: Test Book Author Name\",\n      \"title\": \"Updated: Test Book Title\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/v1/SampleDatabase/MsSql/BookCategoryAndBook/with-transaction/{{sample_mssql_bookcategory_id}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"v1",
+												"SampleDatabase",
+												"MsSql",
+												"BookCategoryAndBook",
+												"with-transaction",
+												"{{sample_mssql_bookcategory_id}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Unique Key",
+							"item": [
+								{
+									"name": "Key Byte[]",
+									"item": [
+										{
+											"name": "Get List",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"if(pm.response.code == 200){",
+															"    const getRandomNumber = function(min, max) {",
+															"        return Math.round(Math.random() * (max - min) + min);",
+															"    }",
+															"    const dataJson = pm.response.json()",
+															"    const {data} = dataJson",
+															"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
+															"    if( selected ){",
+															"        pm.environment.set(\"sample_mssql_byte_id\",selected.id)",
+															"    }",
+															"    ",
+															"}"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyByteItem",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyByteItem"
+													],
+													"query": [
+														{
+															"key": "Page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "ItemsPerPage",
+															"value": "50",
+															"disabled": true
+														},
+														{
+															"key": "Keyword",
+															"value": "updated",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get By Id",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyByteItem/{{sample_mssql_byte_id}}",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyByteItem",
+														"{{sample_mssql_byte_id}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"if(pm.response.code == 200){",
+															"    const dataJson = pm.response.json()",
+															"    const selected = dataJson.data",
+															"    if( selected ){",
+															"        pm.environment.set(\"sample_mssql_byte_id\",selected.id)",
+															"    }",
+															"    ",
+															"}"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\":\"Testing\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyByteItem",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyByteItem"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update By Id",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\":\"Updated: Testing\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyByteItem/{{sample_mssql_byte_id}}",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyByteItem",
+														"{{sample_mssql_byte_id}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Delete By Id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyByteItem/{{sample_mssql_byte_id}}",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyByteItem",
+														"{{sample_mssql_byte_id}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Key Guid",
+									"item": [
+										{
+											"name": "Get List",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"if(pm.response.code == 200){",
+															"    const getRandomNumber = function(min, max) {",
+															"        return Math.round(Math.random() * (max - min) + min);",
+															"    }",
+															"    const dataJson = pm.response.json()",
+															"    const {data} = dataJson",
+															"    const selected = data.items[getRandomNumber(1,data.items.length-1)]",
+															"    if( selected ){",
+															"        pm.environment.set(\"sample_mssql_guid_id\",selected.id)",
+															"    }",
+															"    ",
+															"}"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyGuidItem",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyGuidItem"
+													],
+													"query": [
+														{
+															"key": "Page",
+															"value": "1",
+															"disabled": true
+														},
+														{
+															"key": "ItemsPerPage",
+															"value": "50",
+															"disabled": true
+														},
+														{
+															"key": "Keyword",
+															"value": "updated",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get By Id",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyGuidItem/{{sample_mssql_guid_id}}",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyGuidItem",
+														"{{sample_mssql_guid_id}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"if(pm.response.code == 200){",
+															"    const dataJson = pm.response.json()",
+															"    const selected = dataJson.data",
+															"    if( selected ){",
+															"        pm.environment.set(\"sample_mssql_guid_id\",selected.id)",
+															"    }",
+															"    ",
+															"}"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\":\"Testing\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyGuidItem",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyGuidItem"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update By Id",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\":\"Updated: Testing\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyGuidItem/{{sample_mssql_guid_id}}",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyGuidItem",
+														"{{sample_mssql_guid_id}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Delete By Id",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{base_url}}/v1/SampleDatabase/MsSql/KeyGuidItem/{{sample_mssql_guid_id}}",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"SampleDatabase",
+														"MsSql",
+														"KeyGuidItem",
+														"{{sample_mssql_guid_id}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
 								}
 							]
 						}
