@@ -5,9 +5,9 @@
 - [x] How to Logging to file [PR #12](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/12)
 - [x] Sample Rate Limiter [PR #12](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/12)
 - [x] How to Handle Exception [PR #13](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/13)
-- ✔️ Sample Database Connection , Migration , Seeder and Sample how to use
+- [x] Sample Database Connection , Migration , Seeder and Sample how to use
     - [x] Sqlite Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
-    - ✔️ MS-SQL Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
+    - [x] MS-SQL Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29) [PR #31](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/31)
     - [x] Postgre-SQL Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29) [PR #30](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/30)
     - [x] In-Memory Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29) [PR #30](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/30)
     
