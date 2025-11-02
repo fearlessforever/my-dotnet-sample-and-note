@@ -1,0 +1,20 @@
+<Project>
+
+    <PropertyGroup>
+        <FrameworkVersion>9.0.4</FrameworkVersion>
+        <ExtensionsVersion>9.0.4</ExtensionsVersion>
+        <EntityFrameworkVersion>9.0.4</EntityFrameworkVersion>
+        <IdentityServerVersion>4.3.0</IdentityServerVersion>
+
+        <Copyright>$(_ProjectCopyright)</Copyright>
+        <DelaySign>false</DelaySign>
+        <PublicSign>false</PublicSign>
+    </PropertyGroup>
+
+    <Target Name="SetAssemblyVersion" AfterTargets="MinVer">
+        <PropertyGroup>
+            <AssemblyVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch).0</AssemblyVersion>
+        </PropertyGroup>
+    </Target>
+    
+</Project>

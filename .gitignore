@@ -3,7 +3,6 @@
 # dependencies
 */bin
 */obj
-/extra/LocalDatabase*
 
 # misc
 .DS_Store
@@ -16,3 +15,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/Binary
+*/Binary
+run-commit
