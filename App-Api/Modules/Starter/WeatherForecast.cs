@@ -1,4 +1,4 @@
-namespace Api;
+namespace Fearlessforever.Api.Modules.Starter;
 
 public class WeatherForecast
 {
