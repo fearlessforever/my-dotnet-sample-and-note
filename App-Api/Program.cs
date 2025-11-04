@@ -1,3 +1,4 @@
+using Fearlessforever.Api.Core.HandleException;
 using Fearlessforever.Api.Core.Logging;
 using Fearlessforever.Api.Core.RateLimiter;
 using Fearlessforever.Api.Modules.Sample;
@@ -15,6 +16,7 @@ builder.Services.AddSwaggerGen();
 // Register Module Service & Configuration
 builder.Services.AddModuleSampleServices();
 builder.Services.AddCoreRateLimiter();
+builder.Services.AddCoreHandleException();
 builder.Host.AddCoreLogging();
 //========================================================
 
@@ -37,6 +39,7 @@ app.UseAuthorization();
 app.MapControllers();
 //=========================================================
 app.UseCoreRateLimiter();
+app.UseCoreHandleException();
 //=========================================================
 
 app.Run();

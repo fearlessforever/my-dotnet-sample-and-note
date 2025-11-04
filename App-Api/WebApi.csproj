@@ -7,6 +7,22 @@
     <RootNamespace>Fearlessforever.Api</RootNamespace>
   </PropertyGroup>
 
+  <!--
+    Exclude certain File since it's not support in older version.
+    Another way to exclude certain file for certain sdk version
+  -->
+  <!-- <PropertyGroup>
+    <EnableDefaultCompileItems Condition="'$(NetCoreTargetFramework)' == 'net7.0'">false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(NetCoreTargetFramework)' == 'net7.0'">
+      <Compile Include="**/*.cs" Exclude="Core/HandleException/MyExceptionHandler.cs" />
+  </ItemGroup> -->
+
+  <!--Exclude certain File since it's not support in older version.-->
+  <ItemGroup Condition="'$(NetCoreTargetFramework)' == 'net7.0'">
+    <Compile Remove="Core/HandleException/MyExceptionHandler.cs" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Serilog.AspNetCore" />
