@@ -1,6 +1,8 @@
+using Fearlessforever.Api.Core.CacheProviders;
 using Fearlessforever.Api.Core.HandleException;
 using Fearlessforever.Api.Core.Logging;
 using Fearlessforever.Api.Core.RateLimiter;
+using Fearlessforever.Api.Core.Routes;
 using Fearlessforever.Api.Modules.Sample;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddModuleSampleServices();
 builder.Services.AddCoreRateLimiter();
 builder.Services.AddCoreHandleException();
+builder.Services.AddCoreCacheProviders(builder.Configuration);
 builder.Host.AddCoreLogging();
 //========================================================
 
@@ -40,6 +43,7 @@ app.MapControllers();
 //=========================================================
 app.UseCoreRateLimiter();
 app.UseCoreHandleException();
+app.UseCoreRoutesMinimalApi();
 //=========================================================
 
 app.Run();
