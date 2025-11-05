@@ -369,6 +369,38 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "SampleQueue",
+			"item": [
+				{
+					"name": "Trigger Background Task / Heavy Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Message\":\"Test Running Task\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/sampleQueue",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"sampleQueue"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
