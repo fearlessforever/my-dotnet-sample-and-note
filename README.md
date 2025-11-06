@@ -12,10 +12,11 @@
 - [x] Sample Task Scheduling / Queue [PR #22](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/22)
 - [x] Sample How to Use Secret Configuration [PR #22](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/22)
 - [ ] Sample Sending Email
-- [ ] Sample Server Sent Events ( SSE ) - realtime feature only server can send data
+- [x] Sample Server Sent Events ( SSE ) - realtime feature only server can send data [PR #24](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/24)
 - [ ] Sample Real time connection ( a.k.a socket but in .NET known as SignalR ) - realtime feature server <-> client send data
 - [ ] Sample Authentication / Authorization
 - [ ] Sample Implement Apache Kafka
+- [x] Sample How to Handle App Cancel Token & Linked Api Cance Token [PR #24](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/24)
 
 # Project Feature & Sample (FE Blazor)
 - [ ] How to make the same Blazor app optional can be full client rendering (webassembly/pwa) or server interactive (SSR) + client (CSR)

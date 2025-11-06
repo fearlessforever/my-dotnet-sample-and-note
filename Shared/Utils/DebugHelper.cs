@@ -8,16 +8,26 @@ public static class DebugHelper
   public static ILogger<object>? Logger { get; set; }
   public static void Log(object? data , string? name = "")
   {
+    if (!string.IsNullOrEmpty(name))
+    {
+      name = $"[{name}]";
+    }
+
     if (Logger != null)
-      Logger.LogInformation("Debug {name} : {Debug}" , name , JsonSerializer.Serialize(data));
+      Logger.LogInformation("Debug {name} : {Debug}", name, JsonSerializer.Serialize(data));
     else
       Console.WriteLine($"Debug {name} : {JsonSerializer.Serialize(data)}");
   }
 
   public static void LogError(object? data , string? name = "")
   {
+    if (!string.IsNullOrEmpty(name))
+    {
+      name = $"[{name}]";
+    }
+    
     if (Logger != null)
-      Logger.LogError("Error {name} : {Error}" , name , JsonSerializer.Serialize(data));
+      Logger.LogError("Error {name} : {Error}", name, JsonSerializer.Serialize(data));
     else
       Console.WriteLine($"Error {name} : {JsonSerializer.Serialize(data)}");
   }
