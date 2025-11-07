@@ -447,6 +447,32 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Sample SignalR / Socket",
+			"item": [
+				{
+					"name": "SignalR Page Open in Browser : http://localhost:5000/assets/html/sample-signalr.html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/assets/html/sample-signalr.html",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"assets",
+								"html",
+								"sample-signalr.html"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

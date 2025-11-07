@@ -13,7 +13,7 @@
 - [x] Sample How to Use Secret Configuration [PR #22](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/22)
 - [ ] Sample Sending Email
 - [x] Sample Server Sent Events ( SSE ) - realtime feature only server can send data [PR #24](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/24)
-- [ ] Sample Real time connection ( a.k.a socket but in .NET known as SignalR ) - realtime feature server <-> client send data
+- [x] Sample Real time connection ( a.k.a socket but in .NET known as SignalR ) - realtime feature server <-> client send data [PR #25](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/25)
 - [ ] Sample Authentication / Authorization
 - [ ] Sample Implement Apache Kafka
 - [x] Sample How to Handle App Cancel Token & Linked Api Cance Token [PR #24](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/24)
