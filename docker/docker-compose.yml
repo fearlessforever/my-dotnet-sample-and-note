@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  dotnet-webapi:
+    image: dotnet-web-api:latest
+    container_name: dotnet-web-api
+    volumes:
+      - ../Logs:/app/webapi/Logs
+    environment:
+      - ASPNETCORE_URLS=http://+:5000;
+      - Features:UseSignalR=true
+    expose:
+      - '5000'
+    ports:
+      - '5000:5000'
+    working_dir: /app/webapi
+    command: dotnet WebApi.dll
+    
+    # 172.17.0.1 =  default IP HOST of docker
+    extra_hosts:
+      - "HOST_IP:172.17.0.1"
+      
+    networks:
+      - fearlessforever_app
+
+networks:
+  fearlessforever_app:
+    driver: bridge

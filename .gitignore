@@ -18,4 +18,4 @@ yarn-error.log*
 /Binary
 */Binary
 run-commit
-*/Logs
+**/Logs
