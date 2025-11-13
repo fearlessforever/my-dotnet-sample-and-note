@@ -1,0 +1,103 @@
+name: Test & Build for any problem before PR
+
+on:
+  # push:
+  #   branches:
+  #     - update
+  pull_request:
+    branches:
+      - development
+
+jobs:
+  test-build-linux:
+    needs: test-build-windows
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      # Setup .NET SDK 7.0
+      - name: Setup .NET SDK 7.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '7.0.x'
+
+      # Setup .NET SDK 8.0
+      - name: Setup .NET SDK 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Setup .NET SDK 9.0
+      - name: Setup .NET SDK 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # - name: Move Position To WebApi Application
+      #   run: |
+      #     cd ./App-Api
+      #     ls -lsa
+
+      - name: Restore and Build for .NET SDK 7.0
+        working-directory: ./App-Api
+        run: |
+          dotnet build WebApi.csproj -f net7.0 
+      # dotnet test --no-build
+
+      - name: Restore and Build for .NET SDK 8.0
+        working-directory: ./App-Api
+        run: |
+          dotnet build -p:NetCoreTargetFramework=net8.0  WebApi.csproj -f net8.0 
+      # dotnet test -p:NetCoreTargetFramework=net8.0 --no-build
+
+      - name: Restore and Build for .NET SDK 9.0
+        working-directory: ./App-Api
+        run: |
+          ls -lsa
+          dotnet build -p:NetCoreTargetFramework=net9.0  WebApi.csproj -f net9.0 
+
+  test-build-windows:
+    # needs: test-build-linux
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      # Setup .NET SDK 7.0
+      - name: Setup .NET SDK 7.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '7.0.x'
+
+      # Setup .NET SDK 8.0
+      - name: Setup .NET SDK 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Setup .NET SDK 9.0
+      - name: Setup .NET SDK 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # - name: Move Position To WebApi Application
+      #   run: |
+      #     cd App-Api
+      #     dir
+
+      - name: Restore and Build for .NET SDK 7.0
+        working-directory: ./App-Api
+        run: |
+          dotnet build WebApi.csproj -f net7.0 
+      # dotnet test --no-build
+
+      - name: Restore and Build for .NET SDK 8.0
+        working-directory: ./App-Api
+        run: |
+          dotnet build -p:NetCoreTargetFramework=net8.0 WebApi.csproj -f net8.0 
+      # dotnet test -p:NetCoreTargetFramework=net8.0 --no-build
+
+      - name: Restore and Build for .NET SDK 9.0
+        working-directory: ./App-Api
+        run: |
+          dotnet build -p:NetCoreTargetFramework=net9.0 WebApi.csproj -f net9.0 
