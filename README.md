@@ -6,6 +6,11 @@
 - [x] Sample Rate Limiter [PR #12](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/12)
 - [x] How to Handle Exception [PR #13](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/13)
 - [ ] Sample Database Connection , Migration , Seeder and Sample how to use
+    - [ ] Sqlite Database
+    - [ ] MS-SQL Database
+    - [ ] Postgre-SQL Database
+    - [ ] In-Memory Database
+    
 - [x] Sample Hybrid Cache ( in-app memory & optional Redis Connection ) [PR #14](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/14)
 - [x] Sample Generate Docker Image For Production [PR #27](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/27)
 - [x] Sample Github Action ( CI/CD ) [PR #26](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/26)
@@ -62,6 +67,30 @@ $ ./run stop-docker
 
 ## Swagger ( For WebApi in Development Environment )
 - http://localhost:5000/swagger/index.html
+
+## Docker Image ( production ready )
+```bash
+$ # download compiled app docker image
+$ docker pull ghcr.io/fearlessforever/my-dotnet-sample-and-note:latest
+$
+$ # run the image and send to background
+$ docker run -d \
+  --name dotnet-web-api \
+  -v $(pwd)/../Logs:/app/webapi/Logs \
+  -e 'ASPNETCORE_URLS=http://+:5000;' \
+  -e 'Features:UseSignalR=true' \
+  -e 'ASPNETCORE_ENVIRONMENT=Development' \
+  -w /app/webapi \
+  -p 5000:5000 \
+  --expose 5000 \
+  ghcr.io/fearlessforever/my-dotnet-sample-and-note:latest \
+  dotnet WebApi.dll
+$
+$ #stop / kill it process
+$ docker kill dotnet-web-api
+$ #remove unused container
+$ docker rm dotnet-web-api
+```
 
 ## For Debuging Postman file Environment & Collections
 - [Postman Environment](Postman/My%20.NET%20Sample%20&%20Note%20-%20Env.postman_environment.json)
