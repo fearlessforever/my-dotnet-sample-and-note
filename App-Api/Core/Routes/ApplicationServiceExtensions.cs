@@ -1,6 +1,7 @@
 
 using Fearlessforever.Api.Modules.Sample;
 using Fearlessforever.Api.Modules.SampleCache;
+using Fearlessforever.Api.Modules.SampleDatabase;
 using Fearlessforever.Api.Modules.SampleQueue;
 using Fearlessforever.Api.Modules.SampleSignalR;
 using Fearlessforever.Api.Modules.SampleSse;
@@ -19,6 +20,7 @@ public static partial class ApplicationServiceExtensions
     RoutesMinimalApi.MapMiniApiSampleCache();
     RoutesMinimalApi.MapMiniApiSampleQueue();
     RoutesMinimalApi.MapMiniApiSampleSse();
+    RoutesMinimalApi.MapMiniApiSampleDatabase();
     RoutesMinimalApi.MapMiniApiSampleSignalR(configuration);
 
     RoutesMinimalApi.MapFallback((HttpContext httpContext) =>

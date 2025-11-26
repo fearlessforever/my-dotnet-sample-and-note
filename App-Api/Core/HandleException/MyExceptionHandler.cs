@@ -18,6 +18,14 @@ internal sealed class MyExceptionHandler(
       Message = exception.Message,
       Status = "error",
     };
+    
+    result.Message = exception.Message;
+    ICollection<string> errors = [];
+
+    if (!string.IsNullOrEmpty(exception.InnerException?.Message) && exception.Message != exception.InnerException.Message)
+        errors.Add(exception.InnerException.Message);
+
+    result.Errors = errors;
 
     logger.LogError("Unhandle Error : {error} " , result );
 

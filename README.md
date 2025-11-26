@@ -5,11 +5,11 @@
 - [x] How to Logging to file [PR #12](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/12)
 - [x] Sample Rate Limiter [PR #12](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/12)
 - [x] How to Handle Exception [PR #13](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/13)
-- [ ] Sample Database Connection , Migration , Seeder and Sample how to use
-    - [ ] Sqlite Database
-    - [ ] MS-SQL Database
-    - [ ] Postgre-SQL Database
-    - [ ] In-Memory Database
+- ✔️ Sample Database Connection , Migration , Seeder and Sample how to use
+    - [x] Sqlite Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
+    - ✔️ MS-SQL Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
+    - ✔️ Postgre-SQL Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
+    - ✔️ In-Memory Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
     
 - [x] Sample Hybrid Cache ( in-app memory & optional Redis Connection ) [PR #14](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/14)
 - [x] Sample Generate Docker Image For Production [PR #27](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/27)
@@ -46,10 +46,36 @@ $ ./run Api build
 $ ./run Api build -p:NetCoreTargetFramework=net8.0
 $ ./run Api build -p:NetCoreTargetFramework=net9.0
 $
+$ # Publish
+$ ./run Api publish
+$ ./run Api publish -p:NetCoreTargetFramework=net8.0
+$ ./run Api publish -p:NetCoreTargetFramework=net9.0
+$ ./run Api publish -p:NetCoreTargetFramework=net9.0 -f net9.0 -c Release -o ../dist/api -r linux-x64 --self-contained true
+$ # Publish and Zip it
+$ ./run Api publish -p:NetCoreTargetFramework=net9.0 -f net9.0 -c Release -o ../dist/api -r linux-x64 --self-contained true \
+  && zip -r dotnet-web-api.zip dist/api/ README.md
+$
 $ # Generate binlog for debugging
 $ ./run Api build -bl:output.binlog 
 $ ./run Api build -bl:output.binlog -p:NetCoreTargetFramework=net8.0
 $ ./run Api build -bl:output.binlog -p:NetCoreTargetFramework=net9.0
+$
+$ # =================== EF ( Entity Framework - Database feature ) tool
+$ # Generate new migrations
+$ # Note: This project has multiple DB context ( AppSqliteContext , AppPostgreSqlContext , AppMsSqlContext and AppInMemoryContext - non persistent data )
+$ ./run Api ef migrations add InitiateProject -o ./Migrations/AppSqlite -c AppSqliteContext
+$ ./run Api ef migrations add InitiateProject -o ./Migrations/AppPostgreSql -c AppPostgreSqlContext
+$ ./run Api ef migrations add InitiateProject -o ./Migrations/AppMsSql -c AppMsSqlContext
+$
+$ # Apply Migrations
+$ ./run Api ef database update -c AppSqliteContext
+$
+$ # Rollback to certain migration file
+$ ./run Api ef database update [Migration filename: InitiateProject] -c AppSqliteContext
+$
+$ # Remove Last generated Migration file
+$ # Note: might need to rollback migration before remove it if the migration has been applied to db
+$ ./run Api ef migrations remove -c AppPostgreSqlContext
 ```
 
 ## Build & Running the app in docker [Production]
@@ -76,7 +102,7 @@ $
 $ # run the image and send to background
 $ docker run -d \
   --name dotnet-web-api \
-  -v $(pwd)/../Logs:/app/webapi/Logs \
+  -v $(pwd)/Logs:/app/webapi/Logs \
   -e 'ASPNETCORE_URLS=http://+:5000;' \
   -e 'Features:UseSignalR=true' \
   -e 'ASPNETCORE_ENVIRONMENT=Development' \

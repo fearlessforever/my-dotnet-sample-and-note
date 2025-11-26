@@ -18,6 +18,8 @@ if [[ $# -gt 0 && ${commands[$selectedCMD]} ]]; then
         # Certain Condition
         isWatch=false
         isBuild=false
+        isPublish=false
+        isEntityFrameworkTool=false
 
         if [[ $1 == 'watch' ]]; then
           shift
@@ -27,11 +29,26 @@ if [[ $# -gt 0 && ${commands[$selectedCMD]} ]]; then
           shift
           isBuild=true
         fi
+        if [[ $1 == 'publish' ]]; then
+          shift
+          isPublish=true
+        fi
+        if [[ $1 == 'ef' ]]; then
+          shift
+          isEntityFrameworkTool=true
+        fi
 
         if [[ $isWatch == true ]];then
           ( cd ./App-Api && dotnet watch run "$@" )
         elif [[ $isBuild == true ]];then
           ( cd ./App-Api && dotnet build "$@" )
+        elif [[ $isPublish == true ]];then
+          ( cd ./App-Api && dotnet publish "$@" )
+          # dotnet publish -p:NetCoreTargetFramework=net9.0 WebApi.csproj -f net9.0 -c Release -o ./Logs/api -r linux-x64 --self-contained true
+        elif [[ $isEntityFrameworkTool == true ]];then
+          # dotnet ef migrations add InitiateProject --project ./App-Api/WebApi.csproj --startup-project ./App-Api/ -o ./Core/Databases/Migrations
+          # ( cd ./App-Api && dotnet ef "$@" )
+          dotnet ef --project ./Databases/Databases.csproj --startup-project ./App-Api/ "$@"
         else
           ( cd ./App-Api && dotnet run "$@" )
         fi

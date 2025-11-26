@@ -12,12 +12,14 @@
     Exclude certain File since it's not support in older version.
     Another way to exclude certain file for certain sdk version
   -->
-  <!-- <PropertyGroup>
+  <!-- 
+  <PropertyGroup>
     <EnableDefaultCompileItems Condition="'$(NetCoreTargetFramework)' == 'net7.0'">false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup Condition="'$(NetCoreTargetFramework)' == 'net7.0'">
       <Compile Include="**/*.cs" Exclude="Core/HandleException/MyExceptionHandler.cs" />
-  </ItemGroup> -->
+  </ItemGroup> 
+  -->
 
   <!--Exclude certain File since it's not support in older version.-->
   <ItemGroup Condition="'$(NetCoreTargetFramework)' == 'net7.0'">
@@ -25,16 +27,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="LinqKit" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
     <PackageReference Include="StackExchange.Redis" />
     <PackageReference Include="Hangfire" />
     <PackageReference Include="Hangfire.Redis.StackExchange" />
+
+    <!-- Microsoft Entity -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" >
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\SharedLib.csproj" />
+    <ProjectReference Include="..\Databases\Databases.csproj" />
+    <ProjectReference Include="..\Databases.Shared\Databases.Shared.csproj" />
   </ItemGroup>
 
 </Project>
