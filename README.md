@@ -8,8 +8,8 @@
 - ✔️ Sample Database Connection , Migration , Seeder and Sample how to use
     - [x] Sqlite Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
     - ✔️ MS-SQL Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
-    - ✔️ Postgre-SQL Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
-    - ✔️ In-Memory Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29)
+    - [x] Postgre-SQL Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29) [PR #30](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/30)
+    - [x] In-Memory Database [PR #29](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/29) [PR #30](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/30)
     
 - [x] Sample Hybrid Cache ( in-app memory & optional Redis Connection ) [PR #14](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/14)
 - [x] Sample Generate Docker Image For Production [PR #27](https://github.com/fearlessforever/my-dotnet-sample-and-note/pull/27)
@@ -51,6 +51,8 @@ $ ./run Api publish
 $ ./run Api publish -p:NetCoreTargetFramework=net8.0
 $ ./run Api publish -p:NetCoreTargetFramework=net9.0
 $ ./run Api publish -p:NetCoreTargetFramework=net9.0 -f net9.0 -c Release -o ../dist/api -r linux-x64 --self-contained true
+$ # publish self-contained for alpine linux
+$ ./run Api publish -p:NetCoreTargetFramework=net9.0 -f net9.0 -c Release -o ../dist/api -r linux-musl-x64 --self-contained true
 $ # Publish and Zip it
 $ ./run Api publish -p:NetCoreTargetFramework=net9.0 -f net9.0 -c Release -o ../dist/api -r linux-x64 --self-contained true \
   && zip -r dotnet-web-api.zip dist/api/ README.md

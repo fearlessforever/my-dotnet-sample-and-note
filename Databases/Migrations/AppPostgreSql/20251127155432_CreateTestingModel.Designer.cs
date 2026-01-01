@@ -3,6 +3,7 @@ using System;
 using Fearlessforever.Databases.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Fearlessforever.Databases.Migrations.AppPostgreSql
 {
     [DbContext(typeof(AppPostgreSqlContext))]
-    partial class AppPostgreSqlContextModelSnapshot : ModelSnapshot
+    [Migration("20251127155432_CreateTestingModel")]
+    partial class CreateTestingModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,7 +77,6 @@ namespace Fearlessforever.Databases.Migrations.AppPostgreSql
             modelBuilder.Entity("Fearlessforever.Databases.Shared.Models.Testing.PostgreKeyByteItem", b =>
                 {
                     b.Property<byte[]>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bytea");
 
                     b.Property<string>("CreatedBy")
