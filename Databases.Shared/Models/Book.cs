@@ -7,4 +7,6 @@ public class Book : BaseEntitySoftDelete<int>
   public string AuthorName { get; set; } = string.Empty;
 
   public string Description { get; set; } = string.Empty;
+
+  public ICollection<BookCategory> BookCategories { get; set; } = [];
 }

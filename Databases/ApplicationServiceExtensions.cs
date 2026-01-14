@@ -242,6 +242,12 @@ public static partial class ApplicationServiceExtensions
     services.AddScopedFeatureFlag<PostgreKeyByteItemService>();
     services.AddScopedFeatureFlag<PostgreKeyGuidItemService>();
     services.AddScopedFeatureFlag<ViewPostgreKeyService>();
+
+    // Ms-SQL
+    services.AddScopedFeatureFlag<BookService>();
+    services.AddScopedFeatureFlag<BookCategoryService>();
+    services.AddScopedFeatureFlag<MsSqlKeyGuidItemService>();
+    services.AddScopedFeatureFlag<MsSqlKeyByteItemService>();
     
   }
   

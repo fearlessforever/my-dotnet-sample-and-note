@@ -1,4 +1,5 @@
 using Fearlessforever.Databases.Shared.Models;
+using Fearlessforever.Databases.Shared.Models.Testing;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fearlessforever.Databases.Contexts;
@@ -7,6 +8,8 @@ public sealed class AppMsSqlContext(DbContextOptions<AppMsSqlContext> options) :
 {
   public DbSet<Book> Books { get; set; }
   public DbSet<BookCategory> BookCategories { get; set; }
+  public DbSet<MsSqlKeyByteItem> MsSqlKeyByteItems { get; set; }
+  public DbSet<MsSqlKeyGuidItem> MsSqlKeyGuidItems { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
